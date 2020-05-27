@@ -6,7 +6,7 @@ class SignUpForm(UserCreationForm):
 
     class Meta:
         model = TwitterUser
-        fields = ('username', 'display_name', 'password1', 'password2')
+        fields = ('username', 'password1', 'password2')
     
 class LoginForm(forms.Form):
     username = forms.CharField(max_length=50)
