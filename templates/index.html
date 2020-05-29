@@ -7,15 +7,14 @@
   {{ user.username }}!
   </b></h2></u></a>
 
-  <a href = "{% url 'add_tweet' user_id=user.id%}"><button> Add Tweet</button></a>
+  <a href = "{% url 'add_tweet' user_id=user.id%}"><button> Add Tweet</button></a> | <a href="{% url 'notif'%}"><button>Notifications</button></a>
+  | <a href="{% url 'logout' %}"><button>Logout</button></a>
   
   {% for tweet in tweet_data%}
     
     <p><a href={%url 'profile' user_id=tweet.author.id%}>{{tweet.author}}</a> | <a href = {%url 'tweet_view' tweet_id=tweet.id%}> {{tweet.date}} </a>| {{tweet.tweet}}</p>
   
   {%endfor%}
-  <p><a href="{% url 'notif'%}"><button>Notifications</button></a></p>
-  <p><a href="{% url 'logout' %}"><button>Logout</button></a></p>
   
 
 {% endif %}

@@ -1,21 +1,16 @@
 
-My Tweets:
-{%for tweet in user_tweets%}
-
-<p>{{tweet.author}} | {{tweet.date}} | {{tweet.tweet}}</p>
-
-
-{%endfor%}
-<p>Following: {{following_count}}</p>
-<p>Tweets: {{ tweet_count }}</p>
-
-{% comment %} # Peter Marsh assisted with this part!  {% endcomment %}
+<h1>{{twitteruser}}'s Tweets:</h1>
+<h2><p>Following: {{following_count}} | Tweets: {{ tweet_count }}</p></h2>
+{% comment %} Peter Marsh assisted here! {% endcomment %}
 {% if is_following %}
 <a href = {% url 'unfollow' id=twitteruser.id%}><button>UnFollow</button></a>
 {%else%}
 <a href = {% url 'follow' id=twitteruser.id%}><button>Follow</button></a>
 {%endif%}
+| <a href= {%url 'home'%}><button>Home</button></a>
+{%for tweet in user_tweets%}
+
+<p>{{tweet.author}} | <a href = {%url 'tweet_view' tweet_id=tweet.id%}> {{tweet.date}} </a> | {{tweet.tweet}}</p>
 
 
-
-<a href= {%url 'home'%}><button>Home</button></a>
+{%endfor%}
