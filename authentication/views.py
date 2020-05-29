@@ -1,8 +1,9 @@
 from django.shortcuts import render, reverse, HttpResponseRedirect
-from twitteruser.forms import SignUpForm, LoginForm
+from authentication.forms import SignUpForm, LoginForm
 from django.contrib.auth import login, logout, authenticate
 from twitteruser.models import TwitterUser
 from tweet.models import Tweet
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -40,7 +41,7 @@ def loginview(request):
     form = LoginForm()
     return render(request,'login.html', {'form': form})
     
-
+@login_required
 def logout_view(request):
     logout(request)
     return HttpResponseRedirect(reverse('home'))

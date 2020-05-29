@@ -11,11 +11,11 @@
   
   {% for tweet in tweet_data%}
     
-    <p><a href={%url 'profile' user_id=user.id%}>{{tweet.author}}</a> |<a href = {%url 'tweet_view' tweet_id=tweet.id%}> {{tweet.date}} </a>| {{tweet.tweet}}</p>
+    <p><a href={%url 'profile' user_id=tweet.author.id%}>{{tweet.author}}</a> | <a href = {%url 'tweet_view' tweet_id=tweet.id%}> {{tweet.date}} </a>| {{tweet.tweet}}</p>
   
   {%endfor%}
-  
-  <p><a href="{% url 'logout' %}">logout</a></p>
+  <p><a href="{% url 'notif'%}"><button>Notifications</button></a></p>
+  <p><a href="{% url 'logout' %}"><button>Logout</button></a></p>
   
 
 {% endif %}

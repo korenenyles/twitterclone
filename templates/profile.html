@@ -4,6 +4,18 @@ My Tweets:
 
 <p>{{tweet.author}} | {{tweet.date}} | {{tweet.tweet}}</p>
 
+
 {%endfor%}
+<p>Followers: {{following_count}}</p>
+<p>Tweets: {{tweet_count}}</p>
+
+{% comment %} # Peter Marsh assisted with this part!  {% endcomment %}
+{% if is_following %}
+<a href = {% url 'unfollow' id=twitteruser.id%}><button>UnFollow</button></a>
+{%else%}
+<a href = {% url 'follow' id=twitteruser.id%}><button>Follow</button></a>
+{%endif%}
+
+
 
 <a href= {%url 'home'%}><button>Home</button></a>
