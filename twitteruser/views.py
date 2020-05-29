@@ -24,14 +24,14 @@ def profile_view(request, user_id):
     tweet_count = user_tweets.count()
     twitteruser = TwitterUser.objects.get(id=user_id)
     following_list = twitteruser.following.all()
-    current_user_following_list = request.user.following.all()
+    
     following_count=following_list.count()
-    if twitteruser in current_user_following_list:
+    if twitteruser in following_list:
         is_following = True
     else:
 # Peter Marsh assisted with fixing my follow/unfollow views! 
         is_following= False
-    return render(request, 'profile.html',{'user_tweets':user_tweets,'current_user_following_list':current_user_following_list,'tweet_count':tweet_count,'following_count':following_count,'twitteruser': twitteruser, 'is_following': is_following})
+    return render(request, 'profile.html',{'user_tweets':user_tweets,'tweet_count':tweet_count,'following_count':following_count,'twitteruser': twitteruser, 'is_following': is_following})
     # return render(request, 'profile.html',{'user_tweets':user_tweets,'tweet_count':tweet_count,'twitteruser': twitteruser})
 @login_required
 def follow_user(request, id):
