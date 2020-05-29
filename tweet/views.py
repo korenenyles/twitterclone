@@ -21,11 +21,14 @@ def add_tweet(request, user_id):
                 author = user
             )
             #https://stackoverflow.com/questions/7150652/regex-valid-twitter-mention
-            find_users = re.findall(r'@([\w\-])', data['tweet'])
-            for find_users in set(all_user):
-                #Derek Barnes assisted with fixing my mess!         
+            find_users = re.findall(r'@(\w+)', data['tweet'])
+            # Matthew Perry helped fix my regex too.
+            for tagged in find_users:
+                   
+                #Derek Barnes/Matthew Perry assisted with fixing my mess!  
+                      
                 Notification.objects.create(
-                    notify_user = TwitterUser.objects.get(username=find_users),
+                    notify_user = TwitterUser.objects.get(username=tagged),
                     tweet = tweet,
                     
                             )
