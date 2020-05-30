@@ -1,16 +1,35 @@
-
+<html>
+{%load static%}
+<head>
+<title>Twitter Clone - User Profile</title>
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+</head>
+<body>
+<div class= 'header'>
 <h1>{{twitteruser}}'s Tweets:</h1>
 <h2><p>Following: {{following_count}} | Tweets: {{ tweet_count }}</p></h2>
-{% comment %} Peter Marsh assisted here! {% endcomment %}
+<div class = 'follow-toggle'>
 {% if is_following %}
 <a href = {% url 'unfollow' id=twitteruser.id%}><button>UnFollow</button></a>
 {%else%}
 <a href = {% url 'follow' id=twitteruser.id%}><button>Follow</button></a>
 {%endif%}
-| <a href= {%url 'home'%}><button>Home</button></a>
+</div>
+<div class = 'notif-bar'>
+<a href="{% url 'home'%}"><button>Home</button></a>
+  
+  
+</div>  
+</div>
+{% comment %} Peter Marsh assisted here! {% endcomment %}
+
 {%for tweet in user_tweets%}
-
-<p>{{tweet.author}} | <a href = {%url 'tweet_view' tweet_id=tweet.id%}> {{tweet.date}} </a> | {{tweet.tweet}}</p>
-
+<div class = 'tweet-container'>
+<p class = 'tweet'>{{tweet.author}} -- <a href = {%url 'tweet_view' tweet_id=tweet.id%}>  {{ tweet.date}} </a></p><p>{{tweet.tweet}}</p>
+</div>
 
 {%endfor%}
+</body>
+</html>
+
+

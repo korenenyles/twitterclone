@@ -1,5 +1,47 @@
+<html>
+{% load static %}
+<head>
+<title> Twitter Clone - Add Tweet</title>
+<link rel="stylesheet" href="{% static 'css/addtweet.css' %}">
+
+</head>
+<body>
+<div class = 'container'>
+<div class= 'header'>
+<h1>Home</h1>
+
+
+{% if user.is_authenticated %}
+  <h2>Hi <b><u><a href={%url 'profile' user_id=user.id%}>
+  {{ user.username }}!
+  </b></h2></u></a>
+  <h3>Welcome to my Twitter-Clone!</h3>
+<div class = 'notif-bar'>
+<a href="{% url 'home'%}"><button>Home</button></a>
+  <a href = "{% url 'add_tweet' user_id=user.id%}"><button> Add Tweet</button></a> <a href="{% url 'notif'%}"><button>Notifications</button></a>
+   <a href="{% url 'logout' %}"><button>Logout</button></a>
+</div>  
+<div class = 'container'>
 <form action="" method="post">
 {% csrf_token %}
 {{form.as_p}}
-<button type="submit">Tweet</button>
+<button type="submit" class = 'formbutton'>+</button>
 </form>
+</div>
+
+</div>
+<div>
+{% for tweet in tweet_data%}
+    <div class = 'tweet-container'>
+    <p class = 'tweet'><a href={%url 'profile' user_id=tweet.author.id%}>{{tweet.author}}</a> | <a href = {%url 'tweet_view' tweet_id=tweet.id%}> {{tweet.date}} </a><br><br></p> <p>{{tweet.tweet}}</p>
+    </div>
+  {%endfor%}
+</div>
+  
+
+{% endif %}
+
+
+
+</body>
+</html>

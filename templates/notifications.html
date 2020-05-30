@@ -1,9 +1,26 @@
-
+<html>
+{%load static%}
+<head>
+<title>Twitter-Clone - Notifications</title>
+<link rel="stylesheet" href="{% static 'css/notifications.css' %}">
+</head>
+<body>
 <h1>Notifications:</h1>
 
+<div class = 'notif-bar'>
+<a href="{% url 'home'%}"><button>Home</button></a>
+  <a href = "{% url 'add_tweet' user_id=user.id%}"><button> Add Tweet</button></a> <a href="{% url 'notif'%}"><button>Notifications</button></a>
+   <a href="{% url 'logout' %}"><button>Logout</button></a>
+</div>  
+
 {% for notif in notifications%}
-{{notif.tweet}}
+<div class= 'tweet-container'>
+    <p class = 'tweet'><b>{{notified_user}} tagged you:</b></p><p>{{notif.tweet}}</p>
+
+</div>
 {% endfor %}
 
-<p><a href ="{% url 'home'%}"><button>Home</button></a>
+
+</body>
+</html>
 

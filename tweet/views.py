@@ -10,6 +10,7 @@ from django.contrib.auth.decorators import login_required
 @login_required
 def add_tweet(request, user_id):
     form = AddTweet()
+    tweet_data = Tweet.objects.all().order_by('-date')
     if request.method == "POST":
         form = AddTweet(request.POST)
         if form.is_valid():
@@ -37,7 +38,7 @@ def add_tweet(request, user_id):
             
 
         return HttpResponseRedirect(reverse('home'))
-    return render(request, 'addtweet.html', {'form':form})
+    return render(request, 'addtweet.html', {'form':form, 'tweet_data': tweet_data})
 
 def tweet_view(request, tweet_id):
     tweet = Tweet.objects.get(id=tweet_id)

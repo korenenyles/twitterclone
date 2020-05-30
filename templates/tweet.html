@@ -1,8 +1,25 @@
-
-
-<h2><a href={%url 'profile' user_id=tweet.author.id%}>{{tweet.author}}</a></h2>
-<h3>{{tweet.date}}</h3>
+<html>
+{%load static%}
+<head>
+<title>Twitter-Clone - Tweet</title>
+<link rel="stylesheet" href="{% static 'css/tweet.css' %}">
+</head>
+<body>
+<div class = 'container'>
+<div class= 'header'>
+<h1>Tweet from - {{tweet.author}}</h1>
+<div class = 'notif-bar'> 
+   
+   <a href="{% url 'home' %}"><button>Home</button></a>
+</div> 
+<div class = 'tweet-container'>
+<div class = 'tweet'> 
+<h2><a href={%url 'profile' user_id=tweet.author.id%}>{{tweet.author}}</a> --
+{{tweet.date}}</h2>
 <p>{{tweet.tweet}}</p>
-
-
-<a href={% url 'home' %}><button>Home</button></a>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
