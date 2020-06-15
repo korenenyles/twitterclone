@@ -1,19 +1,30 @@
-from django.shortcuts import render, reverse, HttpResponseRedirect
+from django.shortcuts import render, reverse, HttpResponse, HttpResponseRedirect
 
 from django.contrib.auth import login, logout, authenticate
 from twitteruser.models import TwitterUser
 from tweet.models import Tweet
+from django.views.generic import View
+from django.utils.decorators  import method_decorator
 
 from django.contrib.auth.decorators import login_required
 # Create your views here.
-@login_required
-def homeView(request):
-    html = 'index.html'
-    user_data = TwitterUser.objects.all()
-    tweet_data = Tweet.objects.all().order_by('-date')
-   
+# @login_required
+# def homeView(request):
+#     html = 'index.html'
+#     user_data = TwitterUser.objects.all()
+#     tweet_data = Tweet.objects.all().order_by('-date')
+#     return render(request, html, {"user_data": user_data, 'tweet_data':tweet_data})
 
-    return render(request, html, {"user_data": user_data, 'tweet_data':tweet_data})
+class HomeView(View):
+    @method_decorator(login_required)
+    def get(self, request):
+        html = 'index.html'
+        user_data = TwitterUser.objects.all()
+        tweet_data = Tweet.objects.all().order_by('-date')
+        return render(request, html, {"user_data": user_data, 'tweet_data':tweet_data})
+
+
+        
 
 
 def profile_view(request, user_id):
@@ -54,6 +65,11 @@ def profile_view(request, user_id):
                 })     
 
     
+
+    
+
+
+
 @login_required
 def follow_user(request, id):
     current_user = request.user

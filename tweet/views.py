@@ -5,6 +5,7 @@ from tweet.forms import AddTweet
 import re
 from notification.models import Notification
 from django.contrib.auth.decorators import login_required
+from django.views.generic import View
 
 # Create your views here.
 @login_required
@@ -27,19 +28,16 @@ def add_tweet(request, user_id):
             for tagged in find_users:
                    
                 #Derek Barnes/Matthew Perry assisted with fixing my mess!  
-                      
+                 
                 Notification.objects.create(
                     notify_user = TwitterUser.objects.get(username=tagged),
                     tweet = tweet,
-                    
-                            )
-                        
-
-            
-
+                )
         return HttpResponseRedirect(reverse('home'))
     return render(request, 'addtweet.html', {'form':form, 'tweet_data': tweet_data})
 
-def tweet_view(request, tweet_id):
-    tweet = Tweet.objects.get(id=tweet_id)
-    return render(request, 'tweet.html', {'tweet':tweet})
+
+class TweetView(View):
+    def get(self, request, tweet_id):
+        tweet = Tweet.objects.get(id=tweet_id)
+        return render(request, 'tweet.html', {'tweet':tweet})
